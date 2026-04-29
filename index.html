@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TurboTech | Digital Agency Callback Request</title>
+  <title>TurboTech | Book Your Callback</title>
   <style>
     :root {
       --bg-primary: #ffffff;
@@ -26,13 +26,8 @@
       --font-stack: "Segoe UI", "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
     }
 
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
 
     body {
       margin: 0;
@@ -43,32 +38,6 @@
         radial-gradient(circle at top right, rgba(59, 130, 246, 0.14), transparent 22%),
         linear-gradient(225deg, #eef5ff 0%, #f8fbff 22%, #ffffff 48%);
       overflow-x: hidden;
-    }
-
-    body::before,
-    body::after {
-      content: "";
-      position: fixed;
-      width: 280px;
-      height: 280px;
-      border-radius: 50%;
-      filter: blur(34px);
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0.35;
-    }
-
-    body::before {
-      top: auto;
-      left: -120px;
-      bottom: -80px;
-      background: rgba(255, 255, 255, 0.92);
-    }
-
-    body::after {
-      right: -110px;
-      top: -90px;
-      background: rgba(59, 130, 246, 0.1);
     }
 
     .page {
@@ -87,8 +56,7 @@
       gap: 24px;
     }
 
-    .hero-card,
-    .form-card {
+    .hero-card, .form-card {
       position: relative;
       background: var(--panel);
       backdrop-filter: blur(22px);
@@ -97,19 +65,6 @@
       border-radius: var(--radius-xl);
       box-shadow: var(--shadow-xl);
       overflow: hidden;
-    }
-
-    .hero-card::before,
-    .form-card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: none;
-      pointer-events: none;
-    }
-
-    .hero-card,
-    .form-card {
       padding: 28px 22px;
     }
 
@@ -124,7 +79,6 @@
       color: #0f172a;
       font-weight: 800;
       letter-spacing: 0.02em;
-      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.04);
     }
 
     .hero-title {
@@ -133,8 +87,6 @@
       font-size: clamp(2rem, 7vw, 3.8rem);
       line-height: 1.05;
       letter-spacing: -0.04em;
-      color: #111111;
-      text-shadow: none;
     }
 
     .hero-text {
@@ -143,734 +95,360 @@
       color: var(--text-secondary);
       font-size: 1rem;
       line-height: 1.72;
-      font-weight: 500;
-    }
-
-    .hero-points {
-      margin-top: 20px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
     }
 
     .hero-pill {
+      display: inline-block;
+      margin: 4px;
       padding: 10px 14px;
       border-radius: 999px;
       background: #ffffff;
       border: 1px solid rgba(21, 58, 122, 0.08);
       color: #1e3a8a;
-      font-size: 0.92rem;
+      font-size: 0.85rem;
       font-weight: 700;
     }
 
-    .form-header {
-      margin-bottom: 20px;
-    }
-
+    .form-header { margin-bottom: 24px; }
     .eyebrow {
       display: inline-block;
       padding: 6px 12px;
       border-radius: 999px;
       background: var(--accent-soft);
       color: var(--accent);
-      font-size: 0.82rem;
+      font-size: 0.75rem;
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.08em;
     }
 
-    .form-title,
-    .submitted-title {
+    .form-title {
       margin: 12px 0 8px;
-      font-size: clamp(1.55rem, 4vw, 2.2rem);
+      font-size: clamp(1.5rem, 4vw, 2.2rem);
       letter-spacing: -0.03em;
-      color: #111111;
     }
 
-    .form-subtitle,
-    .submitted-text {
+    .form-subtitle {
       margin: 0;
       color: var(--text-secondary);
-      line-height: 1.7;
-      font-weight: 500;
+      font-size: 0.95rem;
+      line-height: 1.6;
     }
 
-    form,
-    .submitted-state {
-      display: grid;
-      gap: 18px;
+    form { display: grid; gap: 20px; }
+    .field-group { display: grid; gap: 8px; }
+    .field-label { font-weight: 700; font-size: 0.9rem; }
+    .required-mark { color: var(--accent-strong); }
+
+    .control, select, textarea {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      border-radius: var(--radius-md);
+      font-size: 1rem;
+      font-family: inherit;
+      transition: all var(--transition);
     }
 
-    .field-group {
+    .control:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+    }
+
+    textarea { resize: vertical; min-height: 100px; }
+
+    /* Service Checkbox Grid */
+    .services-grid {
       display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
       gap: 10px;
     }
 
-    .field-label,
-    .slot-label {
-      font-weight: 700;
-      font-size: 0.96rem;
-      color: var(--text-primary);
-    }
-
-    .required-mark {
-      color: var(--accent-strong);
-    }
-
-    .control,
-    select {
-      width: 100%;
-      padding: 15px 16px;
-      border: 1px solid rgba(148, 163, 184, 0.35);
-      border-radius: var(--radius-md);
-      background: #ffffff;
-      color: var(--text-primary);
-      font-size: 1rem;
-      outline: none;
-      transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.78);
-    }
-
-    .control::placeholder {
-      color: #708778;
-    }
-
-    .control:focus,
-    select:focus {
-      border-color: rgba(37, 99, 235, 0.35);
-      box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
-      transform: translateY(-1px);
-    }
-
-    .hidden {
-      display: none !important;
-    }
-
-    .time-slot-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 12px;
-    }
-
-    .time-option {
+    .checkbox-card {
       position: relative;
-    }
-
-    .time-option input {
-      position: absolute;
-      opacity: 0;
-      pointer-events: none;
-    }
-
-    .time-card {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 16px 18px;
-      border-radius: var(--radius-lg);
+      gap: 10px;
+      padding: 12px 16px;
       border: 1px solid rgba(148, 163, 184, 0.2);
-      background: #ffffff;
-      color: #111111;
-      font-weight: 700;
+      border-radius: var(--radius-md);
       cursor: pointer;
-      transition: transform var(--transition), border-color var(--transition), background var(--transition), box-shadow var(--transition);
-      box-shadow: var(--shadow-md);
-    }
-
-    .time-card:hover {
-      transform: translateY(-2px);
-      border-color: rgba(37, 99, 235, 0.2);
-      background: rgba(255, 255, 255, 0.92);
-    }
-
-    .time-card::after {
-      content: "";
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      border: 2px solid rgba(37, 99, 235, 0.24);
       transition: all var(--transition);
-      flex-shrink: 0;
-    }
-
-    .time-option input:checked + .time-card {
-      border-color: rgba(37, 99, 235, 0.3);
-      background: linear-gradient(135deg, rgba(37, 99, 235, 0.08), rgba(255, 237, 213, 0.85));
-      box-shadow: 0 18px 36px rgba(15, 23, 42, 0.08);
-      transform: translateY(-2px);
-    }
-
-    .time-option input:checked + .time-card::after {
-      border-color: var(--accent-strong);
-      background: radial-gradient(circle at center, var(--accent-strong) 0 45%, transparent 46% 100%);
-    }
-
-    .status-message {
-      min-height: 22px;
-      font-size: 0.95rem;
-      color: var(--text-secondary);
+      background: #fff;
+      font-size: 0.9rem;
       font-weight: 600;
     }
 
-    .status-message.error {
-      color: var(--danger);
+    .checkbox-card input {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--accent);
     }
 
-    .status-message.success {
-      color: var(--success);
+    .checkbox-card:hover {
+      background: var(--bg-secondary);
+      border-color: var(--accent);
     }
 
-    .submit-btn,
-    .new-request-btn {
-      width: 100%;
-      border-radius: 18px;
-      padding: 16px 20px;
-      font-size: 1rem;
-      font-weight: 800;
-      cursor: pointer;
-      transition: transform var(--transition), box-shadow var(--transition), opacity var(--transition), background var(--transition);
+    .info-box {
+      padding: 12px;
+      background: var(--accent-soft);
+      border-left: 4px solid var(--accent);
+      border-radius: 8px;
+      font-size: 0.85rem;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 10px;
     }
 
     .submit-btn {
-      border: none;
-      color: #ffffff;
-      background: linear-gradient(135deg, #2563eb, #1d4ed8 55%, #ea580c 100%);
-      box-shadow: 0 20px 40px rgba(37, 99, 235, 0.22);
-    }
-
-    .submit-btn:hover:not(:disabled) {
-      transform: translateY(-2px);
-      box-shadow: 0 24px 44px rgba(37, 99, 235, 0.28);
-    }
-
-    .submit-btn:disabled {
-      opacity: 0.72;
-      cursor: wait;
-      transform: none;
-    }
-
-    .new-request-btn {
-      border: 1px solid rgba(148, 163, 184, 0.3);
-      background: rgba(255, 255, 255, 0.88);
-      color: #0f172a;
-      box-shadow: 0 14px 30px rgba(15, 23, 42, 0.06);
-    }
-
-    .new-request-btn:hover {
-      transform: translateY(-2px);
-      background: #ffffff;
-      box-shadow: 0 18px 34px rgba(15, 23, 42, 0.08);
-    }
-
-    .button-text,
-    .button-loading {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-    }
-
-    .button-loading.hidden {
-      display: none;
-    }
-
-    .spinner {
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      border: 2px solid rgba(255, 255, 255, 0.35);
-      border-top-color: #ffffff;
-      animation: spin 0.8s linear infinite;
-    }
-
-    .submitted-icon {
-      width: 64px;
-      height: 64px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 20px;
-      background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(255, 237, 213, 0.8));
-      color: var(--accent);
-      font-size: 1.8rem;
-      font-weight: 800;
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
-    }
-
-    .submitted-summary {
-      display: grid;
-      gap: 12px;
-      padding: 18px;
-      border-radius: var(--radius-lg);
-      background: #ffffff;
-      border: 1px solid rgba(148, 163, 184, 0.2);
-      color: var(--text-secondary);
-      font-weight: 600;
-    }
-
-    .submitted-summary strong {
-      color: #111111;
-    }
-
-    .modal-backdrop {
-      position: fixed;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      background: rgba(15, 23, 42, 0.18);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 220ms ease, visibility 220ms ease;
-      z-index: 20;
-    }
-
-    .modal-backdrop.show {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    .modal {
-      width: min(100%, 520px);
-      border-radius: 28px;
-      padding: 28px 24px;
-      background: #ffffff;
-      border: 1px solid rgba(148, 163, 184, 0.2);
-      box-shadow: 0 24px 80px rgba(15, 23, 42, 0.12);
-      transform: scale(0.92) translateY(18px);
-      transition: transform 260ms ease;
-      text-align: left;
-    }
-
-    .modal-backdrop.show .modal {
-      transform: scale(1) translateY(0);
-    }
-
-    .modal-title {
-      margin: 0 0 12px;
-      font-size: clamp(1.5rem, 5vw, 2rem);
-      line-height: 1.2;
-      letter-spacing: -0.03em;
-      color: #111111;
-    }
-
-    .modal-text {
-      margin: 0;
-      color: var(--text-secondary);
-      line-height: 1.7;
-      font-size: 1rem;
-      font-weight: 600;
-    }
-
-    .modal-time {
-      color: var(--accent-strong);
-      font-weight: 800;
-    }
-
-    .modal-close {
-      margin-top: 22px;
       width: 100%;
-      border: 1px solid rgba(148, 163, 184, 0.2);
-      border-radius: 16px;
-      padding: 14px 16px;
-      background: rgba(242, 250, 245, 0.96);
-      color: var(--text-primary);
+      padding: 16px;
+      border: none;
+      border-radius: var(--radius-md);
+      background: linear-gradient(135deg, #2563eb, #ea580c);
+      color: white;
+      font-weight: 800;
       font-size: 1rem;
-      font-weight: 700;
       cursor: pointer;
-      transition: background var(--transition), transform var(--transition);
+      transition: transform var(--transition), box-shadow var(--transition);
+      box-shadow: 0 10px 25px rgba(37, 99, 235, 0.2);
     }
 
-    .modal-close:hover {
-      background: rgba(232, 247, 236, 1);
-      transform: translateY(-1px);
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 15px 30px rgba(37, 99, 235, 0.3);
     }
 
-    @keyframes spin {
-      to {
-        transform: rotate(360deg);
-      }
+    .hidden { display: none !important; }
+
+    .status-message {
+      font-size: 0.9rem;
+      font-weight: 700;
+      min-height: 20px;
     }
+    .error { color: var(--danger); }
+    .success { color: var(--accent); }
 
     @media (min-width: 768px) {
-      .page {
-        padding: 40px 24px 64px;
-      }
-
-      .shell {
-        grid-template-columns: minmax(280px, 0.9fr) minmax(380px, 1.1fr);
-        align-items: stretch;
-      }
-
-      .hero-card,
-      .form-card {
-        padding: 32px;
-      }
-
-      .time-slot-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .time-option:last-child:nth-child(odd) {
-        grid-column: span 2;
-      }
+      .shell { grid-template-columns: 0.8fr 1.2fr; }
+      .hero-card, .form-card { padding: 40px; }
+      .services-grid { grid-template-columns: 1fr 1fr; }
     }
   </style>
 </head>
 <body>
   <main class="page">
     <div class="shell">
-      <section class="hero-card" aria-label="TurboTech introduction">
-        <div class="brand">
-          <span>Turbo Tech Agency</span>
-        </div>
-        <h1 class="hero-title">Scale your business with digital systems that convert.</h1>
+      <!-- Left: Branding & Info -->
+      <section class="hero-card">
+        <div class="brand">Turbo Tech Agency</div>
+        <h1 class="hero-title">Scale your business with digital systems.</h1>
         <p class="hero-text">
-          TurboTech helps modern businesses grow with premium web experiences, content production,
-          social media execution, and dependable tech support. Share your details and we'll call you
-          back at the time you prefer.
+          TurboTech helps modern businesses grow with premium web experiences and dependable tech support. 
         </p>
-        <div class="hero-points">
-          <span class="hero-pill">Responsive websites</span>
-          <span class="hero-pill">Growth-focused design</span>
-          <span class="hero-pill">Fast callback scheduling</span>
+        <div style="margin-top: 24px;">
+          <span class="hero-pill">✓ Web Dev</span>
+          <span class="hero-pill">✓ Content</span>
+          <span class="hero-pill">✓ Growth</span>
         </div>
       </section>
 
-      <section class="form-card" aria-label="Callback request form">
-        <div id="formContent">
-          <div class="form-header">
-            <span class="eyebrow">Get Started</span>
-            <h2 class="form-title">Book your callback</h2>
-            <p class="form-subtitle">
-              Fill in the details below and our team will reach out with the right service plan for your business.
-            </p>
-          </div>
-
-          <form id="callbackForm" novalidate>
-            <div class="field-group">
-              <label class="field-label" for="name">Name <span class="required-mark">*</span></label>
-              <input class="control" id="name" name="name" type="text" placeholder="Enter your full name" required>
-            </div>
-
-            <div class="field-group">
-              <label class="field-label" for="businessType">Type of Business <span class="required-mark">*</span></label>
-              <select id="businessType" name="businessType" required>
-                <option value="" selected disabled>Select your business type</option>
-                <option value="Other">Other</option>
-                <option value="School">School</option>
-                <option value="Hospital">Hospital</option>
-                <option value="Clinic">Clinic</option>
-                <option value="Salon">Salon</option>
-                <option value="Shop">Shop</option>
-                <option value="Startup">Startup</option>
-              </select>
-            </div>
-
-            <div class="field-group hidden" id="customBusinessTypeGroup">
-              <label class="field-label" for="customBusinessType">Enter Business Type <span class="required-mark">*</span></label>
-              <input class="control" id="customBusinessType" name="customBusinessType" type="text" placeholder="Enter your business type">
-            </div>
-
-            <div class="field-group hidden" id="businessNameGroup">
-              <label class="field-label" for="businessName">Business Name <span class="required-mark">*</span></label>
-              <input class="control" id="businessName" name="businessName" type="text" placeholder="Enter Business Name">
-            </div>
-
-            <div class="field-group">
-              <span class="slot-label">Select Preferred Callback Time <span class="required-mark">*</span></span>
-              <div class="time-slot-grid" role="radiogroup" aria-label="Preferred callback time">
-                <label class="time-option">
-                  <input type="radio" name="timeSlot" value="11 AM - 12 PM" required>
-                  <span class="time-card">11 AM - 12 PM</span>
-                </label>
-                <label class="time-option">
-                  <input type="radio" name="timeSlot" value="1 PM - 2 PM">
-                  <span class="time-card">1 PM - 2 PM</span>
-                </label>
-                <label class="time-option">
-                  <input type="radio" name="timeSlot" value="2 PM - 3 PM">
-                  <span class="time-card">2 PM - 3 PM</span>
-                </label>
-                <label class="time-option">
-                  <input type="radio" name="timeSlot" value="3 PM - 4 PM">
-                  <span class="time-card">3 PM - 4 PM</span>
-                </label>
-                <label class="time-option">
-                  <input type="radio" name="timeSlot" value="5 PM - 6 PM">
-                  <span class="time-card">5 PM - 6 PM</span>
-                </label>
-              </div>
-            </div>
-
-            <div class="field-group">
-              <label class="field-label" for="services">Required Services <span class="required-mark">*</span></label>
-              <select id="services" name="services" required>
-                <option value="" selected disabled>Select a service</option>
-                <option value="Website Development">Website Development</option>
-                <option value="Video Editing &amp; Content Creation">Video Editing &amp; Content Creation</option>
-                <option value="Social Media Management">Social Media Management</option>
-                <option value="IT &amp; Computer Services">IT &amp; Computer Services</option>
-                <option value="Digital Growth Solutions">Digital Growth Solutions</option>
-              </select>
-            </div>
-
-            <div id="statusMessage" class="status-message" aria-live="polite"></div>
-
-            <button id="submitButton" class="submit-btn" type="submit">
-              <span class="button-text">Submit Request</span>
-              <span class="button-loading hidden">
-                <span class="spinner" aria-hidden="true"></span>
-                Sending request...
-              </span>
-            </button>
-          </form>
+      <!-- Right: Form -->
+      <section class="form-card">
+        <div class="form-header">
+          <span class="eyebrow">Get Started</span>
+          <h2 class="form-title">Book Your Callback</h2>
+          <p class="form-subtitle">Fill the details below and our team will reach out with the right service plan for your business.</p>
         </div>
 
-        <div id="submittedState" class="submitted-state hidden" aria-live="polite">
-          <div class="submitted-icon">&#10003;</div>
-          <div class="form-header">
-            <span class="eyebrow">Request Submitted</span>
-            <h2 class="submitted-title">You have already submitted the request.</h2>
-            <p class="submitted-text">
-              Your callback booking is already saved. You can submit a fresh request anytime if you want to choose a new business or time slot.
-            </p>
+        <form id="callbackForm" novalidate>
+          <!-- 1. Name -->
+          <div class="field-group">
+            <label class="field-label" for="name">Name <span class="required-mark">*</span></label>
+            <input class="control" id="name" name="name" type="text" placeholder="Your full name" required>
           </div>
-          <div class="submitted-summary">
-            <div><strong>Name:</strong> <span id="submittedName">-</span></div>
-            <div><strong>Business:</strong> <span id="submittedBusiness">-</span></div>
-            <div><strong>Preferred time:</strong> <span id="submittedTime">-</span></div>
-            <div><strong>Service:</strong> <span id="submittedService">-</span></div>
+
+          <!-- 2. Business Type -->
+          <div class="field-group">
+            <label class="field-label" for="businessType">Business Type <span class="required-mark">*</span></label>
+            <select id="businessType" name="businessType" required>
+              <option value="" selected disabled>Choose type</option>
+              <option value="School">School</option>
+              <option value="Business">Business</option>
+              <option value="Other">Other</option>
+            </select>
           </div>
-          <button id="newRequestButton" class="new-request-btn" type="button">Book a new request</button>
-        </div>
+
+          <!-- Dynamic: Other Business Type -->
+          <div class="field-group hidden" id="customBusinessGroup">
+            <label class="field-label" for="customBusinessType">Enter your business type <span class="required-mark">*</span></label>
+            <input class="control" id="customBusinessType" name="customBusinessType" type="text" placeholder="e.g. NGO, Personal Brand">
+          </div>
+
+          <!-- 3. Business Name -->
+          <div class="field-group hidden" id="businessNameGroup">
+            <label class="field-label" id="businessNameLabel" for="businessName">Business Name <span class="required-mark">*</span></label>
+            <input class="control" id="businessName" name="businessName" type="text" placeholder="Enter name" required>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+            <!-- 4. Date Picker -->
+            <div class="field-group">
+              <label class="field-label" for="date">Preferred Date <span class="required-mark">*</span></label>
+              <input class="control" id="date" name="date" type="date" required>
+            </div>
+
+            <!-- 5. Time Picker -->
+            <div class="field-group">
+              <label class="field-label" for="time">Preferred Time <span class="required-mark">*</span></label>
+              <select id="time" name="time" required>
+                <option value="" selected disabled>Select Time</option>
+                <option value="11:00 AM – 12:00 PM">11:00 AM – 12:00 PM</option>
+                <option value="1:00 PM – 2:00 PM">1:00 PM – 2:00 PM</option>
+                <option value="2:00 PM – 3:00 PM">2:00 PM – 3:00 PM</option>
+                <option value="3:00 PM – 4:00 PM">3:00 PM – 4:00 PM</option>
+                <option value="5:00 PM – 6:00 PM">5:00 PM – 6:00 PM</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- 6. Services (Multi-selection) -->
+          <div class="field-group">
+            <label class="field-label">Required Services <span class="required-mark">*</span></label>
+            <div class="services-grid">
+              <label class="checkbox-card"><input type="checkbox" name="services" value="Website Development"> Website Dev</label>
+              <label class="checkbox-card"><input type="checkbox" name="services" value="Video Editing & Content Creation"> Video Editing</label>
+              <label class="checkbox-card"><input type="checkbox" name="services" value="Social Media Management"> Social Media</label>
+              <label class="checkbox-card"><input type="checkbox" name="services" value="IT & Computer Services"> IT Services</label>
+              <label class="checkbox-card"><input type="checkbox" name="services" value="Digital Growth Services"> Digital Growth</label>
+              <label class="checkbox-card"><input type="checkbox" name="services" value="Videography & Photography"> Media Production</label>
+              <label class="checkbox-card"><input type="checkbox" id="customService" name="services" value="Custom Service"> <strong>Custom Service</strong></label>
+            </div>
+          </div>
+
+          <!-- 7. Custom Requirement Textarea -->
+          <div class="field-group hidden" id="customRequirementGroup">
+            <div class="info-box">You can select multiple services above or describe your custom requirement.</div>
+            <label class="field-label" for="customRequirement">Describe your requirement</label>
+            <textarea id="customRequirement" name="customRequirement" placeholder="Tell us more about what you need..."></textarea>
+            <label style="display: flex; align-items: center; gap: 8px; font-size: 0.85rem; margin-top: 10px; cursor: pointer;">
+                <input type="checkbox" name="services" value="Service Not Listed"> My required service is not listed here
+            </label>
+          </div>
+
+          <div id="statusMessage" class="status-message"></div>
+
+          <button class="submit-btn" type="submit">Submit Request</button>
+        </form>
       </section>
     </div>
   </main>
 
-  <div id="successModal" class="modal-backdrop" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-    <div class="modal">
-      <h3 id="modalTitle" class="modal-title">&#9989; Your request has been submitted successfully.</h3>
-      <p class="modal-text">
-        You will get a callback on your preferred time slot:
-        <span id="modalTime" class="modal-time"></span>
-      </p>
-      <button id="closeModalButton" class="modal-close" type="button">Close</button>
-    </div>
-  </div>
-
   <script>
-    const scriptURL = "https://script.google.com/macros/s/AKfycby_LYe8qx4uO19uGaWojFEHjJGVCLuJ3CgpzQ6LubCPZhLhcAYwNKEIzUTBH1cYyx4/exec";
-    const submissionStorageKey = "turbotechCallbackSubmission";
+    // Constants
+    const form = document.getElementById('callbackForm');
+    const businessType = document.getElementById('businessType');
+    const businessNameGroup = document.getElementById('businessNameGroup');
+    const businessNameLabel = document.getElementById('businessNameLabel');
+    const businessNameInput = document.getElementById('businessName');
+    const customBusinessGroup = document.getElementById('customBusinessGroup');
+    const customServiceCheckbox = document.getElementById('customService');
+    const customReqGroup = document.getElementById('customRequirementGroup');
+    const dateInput = document.getElementById('date');
+    const statusMessage = document.getElementById('statusMessage');
 
-    const formContent = document.getElementById("formContent");
-    const submittedState = document.getElementById("submittedState");
-    const form = document.getElementById("callbackForm");
-    const nameInput = document.getElementById("name");
-    const businessTypeSelect = document.getElementById("businessType");
-    const customBusinessTypeGroup = document.getElementById("customBusinessTypeGroup");
-    const customBusinessTypeInput = document.getElementById("customBusinessType");
-    const businessNameGroup = document.getElementById("businessNameGroup");
-    const businessNameInput = document.getElementById("businessName");
-    const servicesSelect = document.getElementById("services");
-    const submitButton = document.getElementById("submitButton");
-    const buttonText = submitButton.querySelector(".button-text");
-    const buttonLoading = submitButton.querySelector(".button-loading");
-    const statusMessage = document.getElementById("statusMessage");
-    const successModal = document.getElementById("successModal");
-    const modalTime = document.getElementById("modalTime");
-    const closeModalButton = document.getElementById("closeModalButton");
-    const newRequestButton = document.getElementById("newRequestButton");
-    const submittedName = document.getElementById("submittedName");
-    const submittedBusiness = document.getElementById("submittedBusiness");
-    const submittedTime = document.getElementById("submittedTime");
-    const submittedService = document.getElementById("submittedService");
+    // 1. Setup Date Picker Constraints (Next 7 Days)
+    function setupDatePicker() {
+      const today = new Date();
+      const nextWeek = new Date();
+      nextWeek.setDate(today.getDate() + 7);
 
-    const businessPlaceholders = {
-      Other: "Enter Business Name",
-      School: "Enter School Name",
-      Hospital: "Enter Hospital Name",
-      Clinic: "Enter Clinic Name",
-      Salon: "Enter Salon Name",
-      Shop: "Enter Shop Name",
-      Startup: "Enter Startup Name"
-    };
+      const formatDate = (d) => d.toISOString().split('T')[0];
 
-    function updateBusinessFields() {
-      const selectedType = businessTypeSelect.value;
-      const hasSelection = Boolean(selectedType);
-      const isOther = selectedType === "Other";
+      dateInput.min = formatDate(today);
+      dateInput.max = formatDate(nextWeek);
+    }
 
-      customBusinessTypeGroup.classList.toggle("hidden", !isOther);
-      customBusinessTypeInput.required = isOther;
-      if (!isOther) {
-        customBusinessTypeInput.value = "";
+    // 2. Dynamic Field Logic
+    businessType.addEventListener('change', (e) => {
+      const val = e.target.value;
+      
+      // Toggle Business Name Field
+      businessNameGroup.classList.remove('hidden');
+      
+      if (val === 'School') {
+        businessNameLabel.innerHTML = 'School Name <span class="required-mark">*</span>';
+        businessNameInput.placeholder = 'Enter full school name';
+        customBusinessGroup.classList.add('hidden');
+      } else if (val === 'Other') {
+        businessNameLabel.innerHTML = 'Business Name <span class="required-mark">*</span>';
+        businessNameInput.placeholder = 'Enter name';
+        customBusinessGroup.classList.remove('hidden');
+      } else {
+        businessNameLabel.innerHTML = 'Business Name <span class="required-mark">*</span>';
+        businessNameInput.placeholder = 'Enter company name';
+        customBusinessGroup.classList.add('hidden');
       }
+    });
 
-      businessNameGroup.classList.toggle("hidden", !hasSelection);
-      businessNameInput.required = hasSelection;
-      businessNameInput.placeholder = businessPlaceholders[selectedType] || "Enter Business Name";
-      if (!hasSelection) {
-        businessNameInput.value = "";
-      }
-    }
+    // 3. Custom Service Toggle
+    customServiceCheckbox.addEventListener('change', (e) => {
+      customReqGroup.classList.toggle('hidden', !e.target.checked);
+    });
 
-    function setSubmittingState(isSubmitting) {
-      submitButton.disabled = isSubmitting;
-      buttonText.classList.toggle("hidden", isSubmitting);
-      buttonLoading.classList.toggle("hidden", !isSubmitting);
-    }
+    // 4. Form Validation & Submission
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const name = document.getElementById('name').value.trim();
+      const bType = businessType.value;
+      const bName = businessNameInput.value.trim();
+      const dateVal = dateInput.value;
+      const timeVal = document.getElementById('time').value;
+      const services = document.querySelectorAll('input[name="services"]:checked');
 
-    function setStatus(message, type) {
-      statusMessage.textContent = message;
-      statusMessage.className = "status-message" + (type ? " " + type : "");
-    }
-
-    function getSelectedTimeSlot() {
-      return form.querySelector('input[name="timeSlot"]:checked')?.value || "";
-    }
-
-    function validateForm() {
-      const name = nameInput.value.trim();
-      const businessType = businessTypeSelect.value;
-      const customBusinessType = customBusinessTypeInput.value.trim();
-      const businessName = businessNameInput.value.trim();
-      const timeSlot = getSelectedTimeSlot();
-      const services = servicesSelect.value;
-
-      if (!name) return "Please enter your name.";
-      if (!businessType) return "Please select your business type.";
-      if (businessType === "Other" && !customBusinessType) return "Please enter your business type.";
-      if (!businessName) return "Please enter your business name.";
-      if (!timeSlot) return "Please select a preferred callback time.";
-      if (!services) return "Please select the required service.";
-      return "";
-    }
-
-    function saveSubmission(data) {
-      localStorage.setItem(submissionStorageKey, JSON.stringify(data));
-    }
-
-    function getSavedSubmission() {
-      try {
-        const raw = localStorage.getItem(submissionStorageKey);
-        return raw ? JSON.parse(raw) : null;
-      } catch (error) {
-        console.error("Unable to read saved submission:", error);
-        return null;
-      }
-    }
-
-    function clearSavedSubmission() {
-      localStorage.removeItem(submissionStorageKey);
-    }
-
-    function renderSubmittedState(data) {
-      const businessLabel = data.businessType === "Other" && data.customBusinessType
-        ? data.customBusinessType + " (" + data.businessName + ")"
-        : data.businessType + " (" + data.businessName + ")";
-
-      submittedName.textContent = data.name || "-";
-      submittedBusiness.textContent = businessLabel;
-      submittedTime.textContent = data.timeSlot || "-";
-      submittedService.textContent = data.services || "-";
-
-      formContent.classList.add("hidden");
-      submittedState.classList.remove("hidden");
-    }
-
-    function renderFormState() {
-      submittedState.classList.add("hidden");
-      formContent.classList.remove("hidden");
-      form.reset();
-      setStatus("", "");
-      updateBusinessFields();
-      nameInput.focus();
-    }
-
-    async function submitForm(event) {
-      event.preventDefault();
-
-      const validationMessage = validateForm();
-      if (validationMessage) {
-        setStatus(validationMessage, "error");
+      // Validation logic
+      if (!name || !bType || !bName || !dateVal || !timeVal) {
+        showStatus("Please fill in all required fields.", "error");
         return;
       }
 
-      const data = {
-        name: nameInput.value.trim(),
-        businessType: businessTypeSelect.value,
-        customBusinessType: businessTypeSelect.value === "Other" ? customBusinessTypeInput.value.trim() : "",
-        businessName: businessNameInput.value.trim(),
-        timeSlot: getSelectedTimeSlot(),
-        services: servicesSelect.value,
-        timestamp: new Date().toISOString()
-      };
-
-      setStatus("", "");
-      setSubmittingState(true);
-
-      try {
-        await fetch(scriptURL, {
-          method: "POST",
-          mode: "no-cors",
-          headers: {
-            "Content-Type": "text/plain;charset=utf-8"
-          },
-          body: JSON.stringify(data)
-        });
-
-        saveSubmission(data);
-        renderSubmittedState(data);
-        modalTime.textContent = data.timeSlot;
-        successModal.classList.add("show");
-        successModal.setAttribute("aria-hidden", "false");
-        setStatus("Request submitted successfully.", "success");
-      } catch (error) {
-        setStatus("Something went wrong while submitting. Please try again.", "error");
-        console.error("Submission error:", error);
-      } finally {
-        setSubmittingState(false);
+      if (services.length === 0) {
+        showStatus("Please select at least one service.", "error");
+        return;
       }
-    }
 
-    function closeModal() {
-      successModal.classList.remove("show");
-      successModal.setAttribute("aria-hidden", "true");
-    }
-
-    function startNewRequest() {
-      clearSavedSubmission();
-      renderFormState();
-    }
-
-    businessTypeSelect.addEventListener("change", updateBusinessFields);
-    form.addEventListener("submit", submitForm);
-    closeModalButton.addEventListener("click", closeModal);
-    newRequestButton.addEventListener("click", startNewRequest);
-
-    successModal.addEventListener("click", (event) => {
-      if (event.target === successModal) {
-        closeModal();
+      if (bType === 'Other' && !document.getElementById('customBusinessType').value.trim()) {
+        showStatus("Please specify your business type.", "error");
+        return;
       }
+
+      // Success
+      showStatus("Submitted successfully! Our team will contact you soon.", "success");
+      
+      // Log Data (For Backend Integration)
+      const formData = new FormData(form);
+      console.log("Form Submitted:", Object.fromEntries(formData.entries()));
+      
+      // Reset form after delay
+      setTimeout(() => {
+        form.reset();
+        businessNameGroup.classList.add('hidden');
+        customBusinessGroup.classList.add('hidden');
+        customReqGroup.classList.add('hidden');
+        statusMessage.textContent = "";
+      }, 3000);
     });
 
-    document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape" && successModal.classList.contains("show")) {
-        closeModal();
-      }
-    });
-
-    updateBusinessFields();
-
-    const savedSubmission = getSavedSubmission();
-    if (savedSubmission) {
-      renderSubmittedState(savedSubmission);
+    function showStatus(msg, type) {
+      statusMessage.textContent = msg;
+      statusMessage.className = "status-message " + type;
     }
+
+    // Initialize
+    setupDatePicker();
   </script>
 </body>
 </html>
