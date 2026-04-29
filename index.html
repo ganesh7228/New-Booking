@@ -236,7 +236,6 @@
     .error { color: var(--danger); }
     .success { color: var(--accent); }
 
-    /* Success State UI */
     #successState {
         text-align: center;
         padding: 40px 10px;
@@ -271,109 +270,104 @@
       </section>
 
       <section class="form-card">
-        <!-- Form Content -->
+        <!-- Form Container -->
         <div id="formContainer">
-            <div class="form-header">
-                <span class="eyebrow">Get Started</span>
-                <h2 class="form-title">Book Your Callback</h2>
-                <p class="form-subtitle">Fill the details below and our team will reach out with the right service plan for your business.</p>
+          <div class="form-header">
+            <span class="eyebrow">Get Started</span>
+            <h2 class="form-title">Book Your Callback</h2>
+            <p class="form-subtitle">Fill the details below and our team will reach out with the right service plan for your business.</p>
+          </div>
+
+          <form id="callbackForm" novalidate>
+            <div class="field-group">
+              <label class="field-label" for="name">Name <span class="required-mark">*</span></label>
+              <input class="control" id="name" name="name" type="text" placeholder="Your full name" required>
             </div>
 
-            <form id="callbackForm" novalidate>
-                <div class="field-group">
-                    <label class="field-label" for="name">Name <span class="required-mark">*</span></label>
-                    <input class="control" id="name" name="name" type="text" placeholder="Your full name" required>
-                </div>
+            <div class="field-group">
+              <label class="field-label" for="businessType">Business Type <span class="required-mark">*</span></label>
+              <select id="businessType" name="businessType" required>
+                <option value="" selected disabled>Choose type</option>
+                <option value="School">School</option>
+                <option value="Hospital">Hospital</option>
+                <option value="Clinic">Clinic</option>
+                <option value="Salon">Salon</option>
+                <option value="Shop">Shop</option>
+                <option value="Startup">Startup</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
 
-                <div class="field-group">
-                    <label class="field-label" for="businessType">Business Type <span class="required-mark">*</span></label>
-                    <select id="businessType" name="businessType" required>
-                        <option value="" selected disabled>Choose type</option>
-                        <option value="School">School</option>
-                        <option value="Hospital">Hospital</option>
-                        <option value="Clinic">Clinic</option>
-                        <option value="Salon">Salon</option>
-                        <option value="Shop">Shop</option>
-                        <option value="Startup">Startup</option>
-                        <option value="Other">Other</option>
-                    </select>
-                </div>
+            <div class="field-group hidden" id="customBusinessGroup">
+              <label class="field-label" for="customBusinessType">Enter your business type <span class="required-mark">*</span></label>
+              <input class="control" id="customBusinessType" name="customBusinessType" type="text" placeholder="e.g. NGO, Personal Brand">
+            </div>
 
-                <div class="field-group hidden" id="customBusinessGroup">
-                    <label class="field-label" for="customBusinessType">Enter your business type <span class="required-mark">*</span></label>
-                    <input class="control" id="customBusinessType" name="customBusinessType" type="text" placeholder="e.g. NGO, Personal Brand">
-                </div>
+            <div class="field-group" id="businessNameGroup">
+              <label class="field-label" id="businessNameLabel" for="businessName">Business Name <span class="required-mark">*</span></label>
+              <input class="control" id="businessName" name="businessName" type="text" placeholder="Enter name" required>
+            </div>
 
-                <div class="field-group" id="businessNameGroup">
-                    <label class="field-label" id="businessNameLabel" for="businessName">Business Name <span class="required-mark">*</span></label>
-                    <input class="control" id="businessName" name="businessName" type="text" placeholder="Enter name" required>
-                </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+              <div class="field-group">
+                <label class="field-label" for="date">Preferred Date <span class="required-mark">*</span></label>
+                <input class="control" id="date" name="date" type="date" required>
+              </div>
 
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
-                    <div class="field-group">
-                        <label class="field-label" for="date">Preferred Date <span class="required-mark">*</span></label>
-                        <input class="control" id="date" name="date" type="date" required>
-                    </div>
+              <div class="field-group">
+                <label class="field-label" for="time">Preferred Time <span class="required-mark">*</span></label>
+                <select id="time" name="time" required>
+                  <option value="" selected disabled>Select Time</option>
+                  <option value="11:00 AM – 12:00 PM">11:00 AM – 12:00 PM</option>
+                  <option value="1:00 PM – 2:00 PM">1:00 PM – 2:00 PM</option>
+                  <option value="2:00 PM – 3:00 PM">2:00 PM – 3:00 PM</option>
+                  <option value="3:00 PM – 4:00 PM">3:00 PM – 4:00 PM</option>
+                  <option value="5:00 PM – 6:00 PM">5:00 PM – 6:00 PM</option>
+                </select>
+              </div>
+            </div>
 
-                    <div class="field-group">
-                        <label class="field-label" for="time">Preferred Time <span class="required-mark">*</span></label>
-                        <select id="time" name="time" required>
-                            <option value="" selected disabled>Select Time</option>
-                            <option value="11:00 AM – 12:00 PM">11:00 AM – 12:00 PM</option>
-                            <option value="1:00 PM – 2:00 PM">1:00 PM – 2:00 PM</option>
-                            <option value="2:00 PM – 3:00 PM">2:00 PM – 3:00 PM</option>
-                            <option value="3:00 PM – 4:00 PM">3:00 PM – 4:00 PM</option>
-                            <option value="5:00 PM – 6:00 PM">5:00 PM – 6:00 PM</option>
-                        </select>
-                    </div>
-                </div>
+            <div class="field-group">
+              <label class="field-label">Required Services <span class="required-mark">*</span></label>
+              <div class="services-grid">
+                <label class="checkbox-card"><input type="checkbox" name="services" value="Website Development"> Website Dev</label>
+                <label class="checkbox-card"><input type="checkbox" name="services" value="Video Editing & Content Creation"> Video Editing</label>
+                <label class="checkbox-card"><input type="checkbox" name="services" value="Social Media Management"> Social Media</label>
+                <label class="checkbox-card"><input type="checkbox" name="services" value="IT & Computer Services"> IT Services</label>
+                <label class="checkbox-card"><input type="checkbox" name="services" value="Digital Growth Services"> Digital Growth</label>
+                <label class="checkbox-card"><input type="checkbox" name="services" value="Videography & Photography"> Media Production</label>
+                <label class="checkbox-card"><input type="checkbox" id="customService" name="services" value="Custom Service"> <strong>Custom Service</strong></label>
+              </div>
+            </div>
 
-                <div class="field-group">
-                    <label class="field-label">Required Services <span class="required-mark">*</span></label>
-                    <div class="services-grid">
-                        <label class="checkbox-card"><input type="checkbox" name="services" value="Website Development"> Website Dev</label>
-                        <label class="checkbox-card"><input type="checkbox" name="services" value="Video Editing & Content Creation"> Video Editing</label>
-                        <label class="checkbox-card"><input type="checkbox" name="services" value="Social Media Management"> Social Media</label>
-                        <label class="checkbox-card"><input type="checkbox" name="services" value="IT & Computer Services"> IT Services</label>
-                        <label class="checkbox-card"><input type="checkbox" name="services" value="Digital Growth Services"> Digital Growth</label>
-                        <label class="checkbox-card"><input type="checkbox" name="services" value="Videography & Photography"> Media Production</label>
-                        <label class="checkbox-card"><input type="checkbox" id="customService" name="services" value="Custom Service"> <strong>Custom Service</strong></label>
-                    </div>
-                </div>
+            <div class="field-group hidden" id="customRequirementGroup">
+              <div class="info-box">Describe your custom requirement.</div>
+              <label class="field-label" for="customRequirement">Describe your requirement</label>
+              <textarea id="customRequirement" name="customRequirement" placeholder="Tell us more about what you need..."></textarea>
+            </div>
 
-                <div class="field-group hidden" id="customRequirementGroup">
-                    <div class="info-box">You can select multiple services above or describe your custom requirement.</div>
-                    <label class="field-label" for="customRequirement">Describe your requirement</label>
-                    <textarea id="customRequirement" name="customRequirement" placeholder="Tell us more about what you need..."></textarea>
-                    <label style="display: flex; align-items: center; gap: 8px; font-size: 0.85rem; margin-top: 10px; cursor: pointer;">
-                        <input type="checkbox" name="services" value="Service Not Listed"> My required service is not listed here
-                    </label>
-                </div>
-
-                <div id="statusMessage" class="status-message"></div>
-                <button class="submit-btn" type="submit" id="submitBtn">Submit Request</button>
-            </form>
+            <div id="statusMessage" class="status-message"></div>
+            <button class="submit-btn" type="submit" id="submitBtn">Submit Request</button>
+          </form>
         </div>
 
-        <!-- Success State Container -->
+        <!-- Success State -->
         <div id="successState" class="hidden">
-            <div class="success-icon">✓</div>
-            <h2 class="form-title">Form has been submitted successfully.</h2>
-            <p class="form-subtitle" style="margin-bottom: 30px;">You have already submitted the form.</p>
-            <button class="reset-btn" id="resetBtn">👉 Submit Another Response</button>
+          <div class="success-icon">✓</div>
+          <h2 class="form-title">Form has been submitted successfully.</h2>
+          <p class="form-subtitle" style="margin-bottom: 30px;">You have already submitted the form.</p>
+          <button class="reset-btn" id="resetBtn">👉 Submit Another Response</button>
         </div>
       </section>
     </div>
   </main>
 
   <script>
-    // --- CONFIGURATION ---
-    const scriptURL = "PASTE_WEB_APP_URL_HERE"; 
+    const scriptURL = "https://script.google.com/macros/s/AKfycby_LYe8qx4uO19uGaWojFEHjJGVCLuJ3CgpzQ6LubCPZhLhcAYwNKEIzUTBH1cYyx4/exec";
 
-    // --- ELEMENTS ---
+    const form = document.getElementById('callbackForm');
     const formContainer = document.getElementById('formContainer');
     const successState = document.getElementById('successState');
-    const form = document.getElementById('callbackForm');
     const submitBtn = document.getElementById('submitBtn');
     const resetBtn = document.getElementById('resetBtn');
     
@@ -386,7 +380,7 @@
     const dateInput = document.getElementById('date');
     const statusMessage = document.getElementById('statusMessage');
 
-    // 1. Setup Date Picker (Next 7 Days)
+    // 1. Dynamic Date Picker (Next 7 Days)
     function setupDatePicker() {
       const today = new Date();
       const nextWeek = new Date();
@@ -396,25 +390,21 @@
       dateInput.max = formatDate(nextWeek);
     }
 
-    // 2. Business Type & Label Logic
+    // 2. Business Dropdown Logic
     businessTypeSelect.addEventListener('change', (e) => {
       const val = e.target.value;
-      
-      // Toggle "Other" input field
       customBusinessGroup.classList.toggle('hidden', val !== 'Other');
-      document.getElementById('customBusinessType').required = (val === 'Other');
-
-      // Update label for School
+      
       if (val === 'School') {
         businessNameLabel.innerHTML = 'School Name <span class="required-mark">*</span>';
-        businessNameInput.placeholder = 'Enter school name';
+        businessNameInput.placeholder = 'Enter School Name';
       } else {
         businessNameLabel.innerHTML = 'Business Name <span class="required-mark">*</span>';
-        businessNameInput.placeholder = 'Enter name';
+        businessNameInput.placeholder = 'Enter Business Name';
       }
     });
 
-    // 3. Custom Service Toggle
+    // 3. Custom Service UI Toggle
     customServiceCheckbox.addEventListener('change', (e) => {
       customReqGroup.classList.toggle('hidden', !e.target.checked);
     });
@@ -422,68 +412,61 @@
     // 4. Form Submission
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      
+
       // Validation
-      const name = document.getElementById('name').value.trim();
-      const bType = businessTypeSelect.value;
-      const bName = businessNameInput.value.trim();
-      const dVal = dateInput.value;
-      const tVal = document.getElementById('time').value;
-      const serviceCheckboxes = document.querySelectorAll('input[name="services"]:checked');
-      
-      if (!name || !bType || !bName || !dVal || !tVal || serviceCheckboxes.length === 0) {
-        showStatus("Please fill in all required fields and select a service.", "error");
+      const servicesChecked = document.querySelectorAll('input[name="services"]:checked');
+      if (!form.checkValidity() || servicesChecked.length === 0) {
+        showStatus(servicesChecked.length === 0 ? "Please select at least one service." : "Please fill in all required fields.", "error");
         return;
       }
 
-      // Prepare Data
-      const selectedServices = Array.from(serviceCheckboxes).map(cb => cb.value);
+      // Collect Data
+      const formData = new FormData(form);
+      const selectedServices = Array.from(servicesChecked).map(cb => cb.value);
+      
       const payload = {
-        name: name,
-        businessType: bType,
-        businessName: bName,
-        customBusinessType: document.getElementById('customBusinessType').value.trim(),
-        preferredDate: dVal,
-        preferredTime: tVal,
+        name: formData.get('name'),
+        businessType: formData.get('businessType'),
+        businessName: formData.get('businessName'),
+        customBusinessType: formData.get('customBusinessType') || "",
+        preferredDate: formData.get('date'),
+        preferredTime: formData.get('time'),
         services: selectedServices.join(', '),
-        customService: customServiceCheckbox.checked,
-        customRequirement: document.getElementById('customRequirement').value.trim()
+        customRequirement: formData.get('customRequirement') || ""
       };
 
-      // Send Data
       try {
         submitBtn.disabled = true;
-        showStatus("Submitting... Please wait.", "success");
+        showStatus("Submitting request...", "success");
 
         const response = await fetch(scriptURL, {
           method: 'POST',
-          mode: 'no-cors', // standard for Google Apps Script Web Apps
-          cache: 'no-cache',
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' }, // Content-Type workaround for GAS redirects
           body: JSON.stringify(payload)
         });
 
-        // Toggle Views
+        // GAS returns 200 or 302 on success usually. We check if fetch completed.
         formContainer.classList.add('hidden');
         successState.classList.remove('hidden');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
 
       } catch (error) {
         console.error('Error!', error.message);
-        showStatus("Submission failed. Please try again.", "error");
+        showStatus("Something went wrong. Please try again.", "error");
         submitBtn.disabled = false;
       }
     });
 
-    // 5. Reset / Submit Another
+    // 5. Reset Function
     resetBtn.addEventListener('click', () => {
-        form.reset();
-        successState.classList.add('hidden');
-        formContainer.classList.remove('hidden');
-        submitBtn.disabled = false;
-        statusMessage.textContent = "";
-        customBusinessGroup.classList.add('hidden');
-        customReqGroup.classList.add('hidden');
-        businessNameLabel.innerHTML = 'Business Name <span class="required-mark">*</span>';
+      form.reset();
+      submitBtn.disabled = false;
+      statusMessage.textContent = "";
+      customBusinessGroup.classList.add('hidden');
+      customReqGroup.classList.add('hidden');
+      businessNameLabel.innerHTML = 'Business Name <span class="required-mark">*</span>';
+      successState.classList.add('hidden');
+      formContainer.classList.remove('hidden');
     });
 
     function showStatus(msg, type) {
