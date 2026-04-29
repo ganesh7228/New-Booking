@@ -158,7 +158,6 @@
 
     textarea { resize: vertical; min-height: 100px; }
 
-    /* Service Checkbox Grid */
     .services-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -202,7 +201,7 @@
       margin-bottom: 10px;
     }
 
-    .submit-btn {
+    .submit-btn, .reset-btn {
       width: 100%;
       padding: 16px;
       border: none;
@@ -216,9 +215,15 @@
       box-shadow: 0 10px 25px rgba(37, 99, 235, 0.2);
     }
 
-    .submit-btn:hover {
+    .submit-btn:hover, .reset-btn:hover {
       transform: translateY(-2px);
       box-shadow: 0 15px 30px rgba(37, 99, 235, 0.3);
+    }
+
+    .submit-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
     }
 
     .hidden { display: none !important; }
@@ -231,6 +236,17 @@
     .error { color: var(--danger); }
     .success { color: var(--accent); }
 
+    /* Success State UI */
+    #successState {
+        text-align: center;
+        padding: 40px 10px;
+    }
+    .success-icon {
+        font-size: 50px;
+        color: var(--accent);
+        margin-bottom: 20px;
+    }
+
     @media (min-width: 768px) {
       .shell { grid-template-columns: 0.8fr 1.2fr; }
       .hero-card, .form-card { padding: 40px; }
@@ -241,7 +257,6 @@
 <body>
   <main class="page">
     <div class="shell">
-      <!-- Left: Branding & Info -->
       <section class="hero-card">
         <div class="brand">Turbo Tech Agency</div>
         <h1 class="hero-title">Scale your business with digital systems.</h1>
@@ -255,102 +270,114 @@
         </div>
       </section>
 
-      <!-- Right: Form -->
       <section class="form-card">
-        <div class="form-header">
-          <span class="eyebrow">Get Started</span>
-          <h2 class="form-title">Book Your Callback</h2>
-          <p class="form-subtitle">Fill the details below and our team will reach out with the right service plan for your business.</p>
+        <!-- Form Content -->
+        <div id="formContainer">
+            <div class="form-header">
+                <span class="eyebrow">Get Started</span>
+                <h2 class="form-title">Book Your Callback</h2>
+                <p class="form-subtitle">Fill the details below and our team will reach out with the right service plan for your business.</p>
+            </div>
+
+            <form id="callbackForm" novalidate>
+                <div class="field-group">
+                    <label class="field-label" for="name">Name <span class="required-mark">*</span></label>
+                    <input class="control" id="name" name="name" type="text" placeholder="Your full name" required>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label" for="businessType">Business Type <span class="required-mark">*</span></label>
+                    <select id="businessType" name="businessType" required>
+                        <option value="" selected disabled>Choose type</option>
+                        <option value="School">School</option>
+                        <option value="Hospital">Hospital</option>
+                        <option value="Clinic">Clinic</option>
+                        <option value="Salon">Salon</option>
+                        <option value="Shop">Shop</option>
+                        <option value="Startup">Startup</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <div class="field-group hidden" id="customBusinessGroup">
+                    <label class="field-label" for="customBusinessType">Enter your business type <span class="required-mark">*</span></label>
+                    <input class="control" id="customBusinessType" name="customBusinessType" type="text" placeholder="e.g. NGO, Personal Brand">
+                </div>
+
+                <div class="field-group" id="businessNameGroup">
+                    <label class="field-label" id="businessNameLabel" for="businessName">Business Name <span class="required-mark">*</span></label>
+                    <input class="control" id="businessName" name="businessName" type="text" placeholder="Enter name" required>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <div class="field-group">
+                        <label class="field-label" for="date">Preferred Date <span class="required-mark">*</span></label>
+                        <input class="control" id="date" name="date" type="date" required>
+                    </div>
+
+                    <div class="field-group">
+                        <label class="field-label" for="time">Preferred Time <span class="required-mark">*</span></label>
+                        <select id="time" name="time" required>
+                            <option value="" selected disabled>Select Time</option>
+                            <option value="11:00 AM – 12:00 PM">11:00 AM – 12:00 PM</option>
+                            <option value="1:00 PM – 2:00 PM">1:00 PM – 2:00 PM</option>
+                            <option value="2:00 PM – 3:00 PM">2:00 PM – 3:00 PM</option>
+                            <option value="3:00 PM – 4:00 PM">3:00 PM – 4:00 PM</option>
+                            <option value="5:00 PM – 6:00 PM">5:00 PM – 6:00 PM</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">Required Services <span class="required-mark">*</span></label>
+                    <div class="services-grid">
+                        <label class="checkbox-card"><input type="checkbox" name="services" value="Website Development"> Website Dev</label>
+                        <label class="checkbox-card"><input type="checkbox" name="services" value="Video Editing & Content Creation"> Video Editing</label>
+                        <label class="checkbox-card"><input type="checkbox" name="services" value="Social Media Management"> Social Media</label>
+                        <label class="checkbox-card"><input type="checkbox" name="services" value="IT & Computer Services"> IT Services</label>
+                        <label class="checkbox-card"><input type="checkbox" name="services" value="Digital Growth Services"> Digital Growth</label>
+                        <label class="checkbox-card"><input type="checkbox" name="services" value="Videography & Photography"> Media Production</label>
+                        <label class="checkbox-card"><input type="checkbox" id="customService" name="services" value="Custom Service"> <strong>Custom Service</strong></label>
+                    </div>
+                </div>
+
+                <div class="field-group hidden" id="customRequirementGroup">
+                    <div class="info-box">You can select multiple services above or describe your custom requirement.</div>
+                    <label class="field-label" for="customRequirement">Describe your requirement</label>
+                    <textarea id="customRequirement" name="customRequirement" placeholder="Tell us more about what you need..."></textarea>
+                    <label style="display: flex; align-items: center; gap: 8px; font-size: 0.85rem; margin-top: 10px; cursor: pointer;">
+                        <input type="checkbox" name="services" value="Service Not Listed"> My required service is not listed here
+                    </label>
+                </div>
+
+                <div id="statusMessage" class="status-message"></div>
+                <button class="submit-btn" type="submit" id="submitBtn">Submit Request</button>
+            </form>
         </div>
 
-        <form id="callbackForm" novalidate>
-          <!-- 1. Name -->
-          <div class="field-group">
-            <label class="field-label" for="name">Name <span class="required-mark">*</span></label>
-            <input class="control" id="name" name="name" type="text" placeholder="Your full name" required>
-          </div>
-
-          <!-- 2. Business Type -->
-          <div class="field-group">
-            <label class="field-label" for="businessType">Business Type <span class="required-mark">*</span></label>
-            <select id="businessType" name="businessType" required>
-              <option value="" selected disabled>Choose type</option>
-              <option value="School">School</option>
-              <option value="Business">Business</option>
-              <option value="Other">Other</option>
-            </select>
-          </div>
-
-          <!-- Dynamic: Other Business Type -->
-          <div class="field-group hidden" id="customBusinessGroup">
-            <label class="field-label" for="customBusinessType">Enter your business type <span class="required-mark">*</span></label>
-            <input class="control" id="customBusinessType" name="customBusinessType" type="text" placeholder="e.g. NGO, Personal Brand">
-          </div>
-
-          <!-- 3. Business Name -->
-          <div class="field-group hidden" id="businessNameGroup">
-            <label class="field-label" id="businessNameLabel" for="businessName">Business Name <span class="required-mark">*</span></label>
-            <input class="control" id="businessName" name="businessName" type="text" placeholder="Enter name" required>
-          </div>
-
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
-            <!-- 4. Date Picker -->
-            <div class="field-group">
-              <label class="field-label" for="date">Preferred Date <span class="required-mark">*</span></label>
-              <input class="control" id="date" name="date" type="date" required>
-            </div>
-
-            <!-- 5. Time Picker -->
-            <div class="field-group">
-              <label class="field-label" for="time">Preferred Time <span class="required-mark">*</span></label>
-              <select id="time" name="time" required>
-                <option value="" selected disabled>Select Time</option>
-                <option value="11:00 AM – 12:00 PM">11:00 AM – 12:00 PM</option>
-                <option value="1:00 PM – 2:00 PM">1:00 PM – 2:00 PM</option>
-                <option value="2:00 PM – 3:00 PM">2:00 PM – 3:00 PM</option>
-                <option value="3:00 PM – 4:00 PM">3:00 PM – 4:00 PM</option>
-                <option value="5:00 PM – 6:00 PM">5:00 PM – 6:00 PM</option>
-              </select>
-            </div>
-          </div>
-
-          <!-- 6. Services (Multi-selection) -->
-          <div class="field-group">
-            <label class="field-label">Required Services <span class="required-mark">*</span></label>
-            <div class="services-grid">
-              <label class="checkbox-card"><input type="checkbox" name="services" value="Website Development"> Website Dev</label>
-              <label class="checkbox-card"><input type="checkbox" name="services" value="Video Editing & Content Creation"> Video Editing</label>
-              <label class="checkbox-card"><input type="checkbox" name="services" value="Social Media Management"> Social Media</label>
-              <label class="checkbox-card"><input type="checkbox" name="services" value="IT & Computer Services"> IT Services</label>
-              <label class="checkbox-card"><input type="checkbox" name="services" value="Digital Growth Services"> Digital Growth</label>
-              <label class="checkbox-card"><input type="checkbox" name="services" value="Videography & Photography"> Media Production</label>
-              <label class="checkbox-card"><input type="checkbox" id="customService" name="services" value="Custom Service"> <strong>Custom Service</strong></label>
-            </div>
-          </div>
-
-          <!-- 7. Custom Requirement Textarea -->
-          <div class="field-group hidden" id="customRequirementGroup">
-            <div class="info-box">You can select multiple services above or describe your custom requirement.</div>
-            <label class="field-label" for="customRequirement">Describe your requirement</label>
-            <textarea id="customRequirement" name="customRequirement" placeholder="Tell us more about what you need..."></textarea>
-            <label style="display: flex; align-items: center; gap: 8px; font-size: 0.85rem; margin-top: 10px; cursor: pointer;">
-                <input type="checkbox" name="services" value="Service Not Listed"> My required service is not listed here
-            </label>
-          </div>
-
-          <div id="statusMessage" class="status-message"></div>
-
-          <button class="submit-btn" type="submit">Submit Request</button>
-        </form>
+        <!-- Success State Container -->
+        <div id="successState" class="hidden">
+            <div class="success-icon">✓</div>
+            <h2 class="form-title">Form has been submitted successfully.</h2>
+            <p class="form-subtitle" style="margin-bottom: 30px;">You have already submitted the form.</p>
+            <button class="reset-btn" id="resetBtn">👉 Submit Another Response</button>
+        </div>
       </section>
     </div>
   </main>
 
   <script>
-    // Constants
+    // --- CONFIGURATION ---
+    const scriptURL = "PASTE_WEB_APP_URL_HERE"; 
+
+    // --- ELEMENTS ---
+    const formContainer = document.getElementById('formContainer');
+    const successState = document.getElementById('successState');
     const form = document.getElementById('callbackForm');
-    const businessType = document.getElementById('businessType');
-    const businessNameGroup = document.getElementById('businessNameGroup');
+    const submitBtn = document.getElementById('submitBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    
+    const businessTypeSelect = document.getElementById('businessType');
     const businessNameLabel = document.getElementById('businessNameLabel');
     const businessNameInput = document.getElementById('businessName');
     const customBusinessGroup = document.getElementById('customBusinessGroup');
@@ -359,37 +386,31 @@
     const dateInput = document.getElementById('date');
     const statusMessage = document.getElementById('statusMessage');
 
-    // 1. Setup Date Picker Constraints (Next 7 Days)
+    // 1. Setup Date Picker (Next 7 Days)
     function setupDatePicker() {
       const today = new Date();
       const nextWeek = new Date();
       nextWeek.setDate(today.getDate() + 7);
-
       const formatDate = (d) => d.toISOString().split('T')[0];
-
       dateInput.min = formatDate(today);
       dateInput.max = formatDate(nextWeek);
     }
 
-    // 2. Dynamic Field Logic
-    businessType.addEventListener('change', (e) => {
+    // 2. Business Type & Label Logic
+    businessTypeSelect.addEventListener('change', (e) => {
       const val = e.target.value;
       
-      // Toggle Business Name Field
-      businessNameGroup.classList.remove('hidden');
-      
+      // Toggle "Other" input field
+      customBusinessGroup.classList.toggle('hidden', val !== 'Other');
+      document.getElementById('customBusinessType').required = (val === 'Other');
+
+      // Update label for School
       if (val === 'School') {
         businessNameLabel.innerHTML = 'School Name <span class="required-mark">*</span>';
-        businessNameInput.placeholder = 'Enter full school name';
-        customBusinessGroup.classList.add('hidden');
-      } else if (val === 'Other') {
-        businessNameLabel.innerHTML = 'Business Name <span class="required-mark">*</span>';
-        businessNameInput.placeholder = 'Enter name';
-        customBusinessGroup.classList.remove('hidden');
+        businessNameInput.placeholder = 'Enter school name';
       } else {
         businessNameLabel.innerHTML = 'Business Name <span class="required-mark">*</span>';
-        businessNameInput.placeholder = 'Enter company name';
-        customBusinessGroup.classList.add('hidden');
+        businessNameInput.placeholder = 'Enter name';
       }
     });
 
@@ -398,48 +419,71 @@
       customReqGroup.classList.toggle('hidden', !e.target.checked);
     });
 
-    // 4. Form Validation & Submission
-    form.addEventListener('submit', (e) => {
+    // 4. Form Submission
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
       
+      // Validation
       const name = document.getElementById('name').value.trim();
-      const bType = businessType.value;
+      const bType = businessTypeSelect.value;
       const bName = businessNameInput.value.trim();
-      const dateVal = dateInput.value;
-      const timeVal = document.getElementById('time').value;
-      const services = document.querySelectorAll('input[name="services"]:checked');
-
-      // Validation logic
-      if (!name || !bType || !bName || !dateVal || !timeVal) {
-        showStatus("Please fill in all required fields.", "error");
-        return;
-      }
-
-      if (services.length === 0) {
-        showStatus("Please select at least one service.", "error");
-        return;
-      }
-
-      if (bType === 'Other' && !document.getElementById('customBusinessType').value.trim()) {
-        showStatus("Please specify your business type.", "error");
-        return;
-      }
-
-      // Success
-      showStatus("Submitted successfully! Our team will contact you soon.", "success");
+      const dVal = dateInput.value;
+      const tVal = document.getElementById('time').value;
+      const serviceCheckboxes = document.querySelectorAll('input[name="services"]:checked');
       
-      // Log Data (For Backend Integration)
-      const formData = new FormData(form);
-      console.log("Form Submitted:", Object.fromEntries(formData.entries()));
-      
-      // Reset form after delay
-      setTimeout(() => {
+      if (!name || !bType || !bName || !dVal || !tVal || serviceCheckboxes.length === 0) {
+        showStatus("Please fill in all required fields and select a service.", "error");
+        return;
+      }
+
+      // Prepare Data
+      const selectedServices = Array.from(serviceCheckboxes).map(cb => cb.value);
+      const payload = {
+        name: name,
+        businessType: bType,
+        businessName: bName,
+        customBusinessType: document.getElementById('customBusinessType').value.trim(),
+        preferredDate: dVal,
+        preferredTime: tVal,
+        services: selectedServices.join(', '),
+        customService: customServiceCheckbox.checked,
+        customRequirement: document.getElementById('customRequirement').value.trim()
+      };
+
+      // Send Data
+      try {
+        submitBtn.disabled = true;
+        showStatus("Submitting... Please wait.", "success");
+
+        const response = await fetch(scriptURL, {
+          method: 'POST',
+          mode: 'no-cors', // standard for Google Apps Script Web Apps
+          cache: 'no-cache',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        // Toggle Views
+        formContainer.classList.add('hidden');
+        successState.classList.remove('hidden');
+
+      } catch (error) {
+        console.error('Error!', error.message);
+        showStatus("Submission failed. Please try again.", "error");
+        submitBtn.disabled = false;
+      }
+    });
+
+    // 5. Reset / Submit Another
+    resetBtn.addEventListener('click', () => {
         form.reset();
-        businessNameGroup.classList.add('hidden');
+        successState.classList.add('hidden');
+        formContainer.classList.remove('hidden');
+        submitBtn.disabled = false;
+        statusMessage.textContent = "";
         customBusinessGroup.classList.add('hidden');
         customReqGroup.classList.add('hidden');
-        statusMessage.textContent = "";
-      }, 3000);
+        businessNameLabel.innerHTML = 'Business Name <span class="required-mark">*</span>';
     });
 
     function showStatus(msg, type) {
@@ -447,7 +491,6 @@
       statusMessage.className = "status-message " + type;
     }
 
-    // Initialize
     setupDatePicker();
   </script>
 </body>
